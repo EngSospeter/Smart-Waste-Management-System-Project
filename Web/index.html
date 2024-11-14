@@ -18,23 +18,17 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Scheduling Section -->
-        <div class="scheduling">
-            <h3>Schedule Waste Collection</h3>
-            <form id="schedule-form">
-                <label for="collection-date">Select Date:</label>
-                <input type="date" id="collection-date">
-                
-                <label for="time-slot">Select Time Slot:</label>
-                <select id="time-slot">
-                    <option value="9-11am">9:00 - 11:00 AM</option>
-                    <option value="12-2pm">12:00 - 2:00 PM</option>
-                    <option value="3-5pm">3:00 - 5:00 PM</option>
-                </select>
-                
-                <button type="button" onclick="scheduleCollection()">Schedule</button>
-            </form>
+
+        <!-- Navigation Icons -->
+        <div class="nav-icons">
+            <div class="icon" onclick="window.location.href='schedule.html'">
+                <img src="schedule-icon.png" alt="Schedule Waste Collection">
+                <p>Schedule Collection</p>
+            </div>
+            <div class="icon" onclick="window.location.href='payment.html'">
+                <img src="payment-icon.png" alt="Make Payment">
+                <p>Make Payment</p>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
