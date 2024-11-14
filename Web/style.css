@@ -1,4 +1,4 @@
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -49,6 +49,14 @@ h2 {
     height: auto;
 }
 
+.nav-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
 .scheduling {
     background-color: #dcedc8;
     border-radius: 8px;
@@ -73,12 +81,17 @@ input, select, button {
     outline: none;
 }
 
+
 button {
-    background-color: #388e3c;
+    padding: 10px 20px;
+    background-color: #4CAF50;  /* Green color */
     color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #2e7d32;
+    background-color: #45a049;  /* Darker green on hover */
 }
