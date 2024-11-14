@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Waste Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Schedule Waste Collection</h3>
+        
+        <!-- Back to Home Button -->
+        <button onclick="window.location.href='index.html'">Back to Home</button>
+
+        <!-- Scheduling Form -->
+        <form id="schedule-form">
+            <label for="collection-date">Select Date:</label>
+            <input type="date" id="collection-date">
+            
+            <label for="time-slot">Select Time Slot:</label>
+            <select id="time-slot">
+                <option value="9-11am">9:00 - 11:00 AM</option>
+                <option value="12-2pm">12:00 - 2:00 PM</option>
+                <option value="3-5pm">3:00 - 5:00 PM</option>
+            </select>
+            
+            <button type="button" onclick="scheduleCollection()">Schedule</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
