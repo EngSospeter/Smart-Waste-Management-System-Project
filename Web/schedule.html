@@ -4,31 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule Waste Collection</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h3>Schedule Waste Collection</h3>
-        
-        <!-- Back to Home Button -->
-        <button onclick="window.location.href='index.html'">Back to Home</button>
+        <!-- Title and Back to Home Button in a flex container -->
+        <div class="header">
+            <h3>Schedule Waste Collection</h3>
+            <button class="back-to-home" onclick="window.location.href='{{ url_for('index') }}'">Back to Home</button>
+        </div>
 
         <!-- Scheduling Form -->
         <form id="schedule-form">
             <label for="collection-date">Select Date:</label>
-            <input type="date" id="collection-date">
-            
+            <input type="date" id="collection-date" required> <!-- Ensure the input is required -->
+
             <label for="time-slot">Select Time Slot:</label>
-            <select id="time-slot">
+            <select id="time-slot" required> <!-- Ensure the input is required -->
+                <option value="" disabled selected>Select a time slot</option>
                 <option value="9-11am">9:00 - 11:00 AM</option>
                 <option value="12-2pm">12:00 - 2:00 PM</option>
                 <option value="3-5pm">3:00 - 5:00 PM</option>
             </select>
-            
+
             <button type="button" onclick="scheduleCollection()">Schedule</button>
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Ensure the DOM is fully loaded before running the script
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize the min date for the date input
+            const dateInput = document.getElementById('collection-date');
+            if (dateInput) {
+                const today = new Date();
+                today.setDate(today.getDate() + 1); // Tomorrow's date
+                const minDate = today.toISOString().split('T')[0];
+                dateInput.setAttribute('min', minDate);
+            }
+        });
+
+        // Function to schedule a collection
+        function scheduleCollection() {
+            const date = document.getElementById('collection-date')?.value;
+            const time = document.getElementById('time-slot')?.value;
+
+            if (date && time) {
+                // Send the scheduling data to the server
+                fetch('/schedule', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ date, time }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`Collection scheduled for ${date} at ${time}`);
+                    } else {
+                        alert(data.error || "Failed to schedule collection. Try again.");
+                    }
+                })
+                .catch(error => console.error('Error scheduling collection:', error));
+            } else {
+                alert("Please select a valid date and time slot.");
+            }
+        }
+    </script>
 </body>
 </html>
