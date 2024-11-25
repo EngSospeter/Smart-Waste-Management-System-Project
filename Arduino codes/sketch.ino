@@ -1,6 +1,6 @@
 const int trigPin = 9;
 const int echoPin = 10;
-const float binDepth = 50.0; // Total depth of the bin in cm
+const float binDepth = 21.0; // Total depth of the bin in cm
 
 void setup() {
   Serial.begin(9600);
