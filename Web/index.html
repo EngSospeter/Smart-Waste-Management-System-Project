@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Waste Management App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // Function to fetch the current bin level
+        function fetchBinLevel() {
+            fetch('/current_bin_level')
+                .then(response => response.json())
+                .then(data => {
+                    const binLevel = data.level !== undefined ? data.level : 0; // Default to 0 if no data
+                    document.getElementById('waste-percentage').innerText = `${binLevel}%`; // Update the displayed level
+                })
+                .catch(error => console.error('Error fetching bin level:', error));
+        }
+
+        // Fetch the bin level when the page loads
+        window.onload = fetchBinLevel;
+    </script>
 </head>
 <body>
     <div class="container">
@@ -12,25 +27,26 @@
         <div class="dashboard">
             <h2>Smart Waste Management System</h2>
             <div class="bin-status">
-                <div class="bin" id="bin-empty">
-                    <img src="empty-bin.png" alt="Empty Bin">
-                    <p id="waste-percentage">20%</p>
+                <div class="bin" id="bin-status">
+                    <img id="bin-image" src="/static/empty-bin.png" alt="Empty Bin"> <!-- Bin image remains unchanged -->
+                    <p id="waste-percentage">0%</p> <!-- This percentage will be updated dynamically -->
                 </div>
             </div>
         </div>
 
         <!-- Navigation Icons -->
         <div class="nav-icons">
-            <div class="icon" onclick="window.location.href='schedule.html'">
-                <img src="schedule-icon.png" alt="Schedule Waste Collection">
+            <div class="icon" onclick="window.location.href='{{ url_for('schedule') }}'">
+                <img src="/static/schedule-icon.png" alt="Schedule Waste Collection">
                 <p>Schedule Collection</p>
             </div>
-            <div class="icon" onclick="window.location.href='payment.html'">
-                <img src="payment-icon.png" alt="Make Payment">
+            <div class="icon" onclick="window.location.href='{{ url_for('payment') }}'">
+                <img src="/static/payment-icon.png" alt="Make Payment">
                 <p>Make Payment</p>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
